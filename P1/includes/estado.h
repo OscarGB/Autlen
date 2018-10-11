@@ -17,7 +17,7 @@ typedef struct _Estado Estado;
 Función para crear un nuevo estado, reserva memoria para 
 el nombre.
 */
-Estado* estadoNuevo(char* nombre, int tipo);
+Estado* estadoNuevo(char* nombre, int tipo, int num_estados, int num_simbolos);
 
 /*
 Elimina el estado est.
@@ -43,5 +43,16 @@ char* estadoNombre(Estado* p_s);
 Devuelve el tipo de p_s.
 */
 int estadoTipo(Estado* p_s);
+
+/*
+Devuelve la transición en la posición i
+*/
+int* getTransicion(Estado* p_s, int i);
+
+/*
+Inserta la transición
+Dada por el simbolo i-ésimo y con destino el estado j-ésimo
+*/
+void estadoInsertaTransicion(Estado* p_s, int i, int j);
 
 #endif //_ESTADO_H

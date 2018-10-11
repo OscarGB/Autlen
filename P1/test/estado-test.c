@@ -32,16 +32,16 @@ int main (int argc, char ** argv)
         switch ( i % 4 )
         {
             case 0:
-                estados[i] = estadoNuevo(nombre_estado,INICIAL_Y_FINAL);
+                estados[i] = estadoNuevo(nombre_estado,INICIAL_Y_FINAL, 4, 1);
                 break;
             case 1:
-                estados[i] = estadoNuevo(nombre_estado,INICIAL);
+                estados[i] = estadoNuevo(nombre_estado,INICIAL, 4, 1);
                 break;
             case 2:
-                estados[i] = estadoNuevo(nombre_estado,FINAL);
+                estados[i] = estadoNuevo(nombre_estado,FINAL, 4, 1);
                 break;
             case 3:
-                estados[i] = estadoNuevo(nombre_estado,NORMAL);
+                estados[i] = estadoNuevo(nombre_estado,NORMAL, 4, 1);
                 break;
 
 

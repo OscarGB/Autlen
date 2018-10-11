@@ -1,7 +1,32 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "alfabeto.h"
+
+struct _Alfabeto{
+	char *nombre;
+	int tamano;
+	char **simbolos;
+};
+
+/*
+Devuelve el símbolo en la posición i
+*/
+char* alfabetoGetSimbolo(Alfabeto* alf, int i){
+	return alf->simbolos[i];
+}
+
+/*
+Devuelve el indice del simbolo s
+*/
+int getIndice(Alfabeto* alf, char* s){
+	for(int i = 0; i < alf->tamano; i++){
+		if(strcmp(alf->simbolos[i], s) == 0)
+			return i;
+	}
+	return -1;
+}
 
 /*
 Funcion para crear un alfabeto nuevo reservando memoria
