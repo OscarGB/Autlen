@@ -27,7 +27,7 @@ AFND * AFNDNuevo(char * nombre, int num_estados, int num_simbolos){
 	afnd->num_simbolos = num_simbolos;
 	afnd->num_estados = num_estados;
 	afnd->estados=(Estado**)malloc(sizeof(Estado*)*num_estados);
-	afnd->simbolos_actual = 0;
+	afnd->num_estados_actual = 0;
 	afnd->cadena_actual = palabraNueva();
 	afnd->estados_actuales = (int *)calloc(num_estados,sizeof(int));
 	return afnd;
@@ -37,7 +37,7 @@ AFND * AFNDNuevo(char * nombre, int num_estados, int num_simbolos){
 Elimina un AFND, liberando toda la memoria
 */
 void AFNDElimina(AFND * p_afnd){
-	for(int i = 0; i < p_afnd->estados; i++){
+	for(int i = 0; i < p_afnd->num_estados; i++){
 		estadoElimina(p_afnd->estados[i]);
 	}
 	free(p_afnd->estados);
@@ -70,13 +70,13 @@ void AFNDImprime(FILE * fd, AFND* p_afnd){
 			destinos = getTransicion(p_afnd->estados[i], j);
 			for(k = 0; k < p_afnd->num_estados; k++){
 				if(destinos[k] == 1){
-					fprintf(fd, "%s ", p_afnd->estados[k]);
+					fprintf(fd, "%s ", estadoNombre(p_afnd->estados[k]));
 				}
 			}
 			fprintf(fd, "}\n");
 		}
 	}
-	fprintf(fd, "}\n");
+	fprintf(fd, "\n\t}\n}\n");
 	return;
 }
 
@@ -106,7 +106,7 @@ AFND * AFNDInsertaTransicion(AFND * p_afnd,
                              char * nombre_simbolo_entrada, 
                              char * nombre_estado_f ){
 	int indice_i, indice_f, indice_simbolo;
-	for( int i = 0; i < afnd->num_estados; i++){
+	for( int i = 0; i < p_afnd->num_estados; i++){
 		if(estadoEs(p_afnd->estados[i], nombre_estado_i))
 			indice_i = i;
 		if(estadoEs(p_afnd->estados[i], nombre_estado_f))
@@ -123,6 +123,7 @@ Inserta una letra en el AFND
 */
 AFND * AFNDInsertaLetra(AFND * p_afnd, char * letra){
 	palabraInsertaLetra(p_afnd->cadena_actual, letra);
+	return p_afnd;
 }
 
 /*
@@ -132,7 +133,7 @@ void AFNDImprimeConjuntoEstadosActual(FILE * fd, AFND * p_afnd){
 	fprintf(fd, "ACTUALMENTE EN {");
 	for(int i = 0; i < p_afnd->num_estados; i++){
 		if(p_afnd->estados_actuales[i] == 1){
-			estadoImprime(p_afnd->estados[i]);
+			estadoImprime(fd, p_afnd->estados[i]);
 		}
 	}
 	fprintf(fd, "}\n");
@@ -142,7 +143,7 @@ void AFNDImprimeConjuntoEstadosActual(FILE * fd, AFND * p_afnd){
 Imprime la cadena actual del AFND
 */
 void AFNDImprimeCadenaActual(FILE *fd, AFND * p_afnd){
-	palabraImprime(p_afnd->cadena_actual);
+	palabraImprime(fd, p_afnd->cadena_actual);
 }
 
 /*
@@ -175,9 +176,10 @@ void AFNDProcesaEntrada(FILE * fd, AFND * p_afnd){
 Hace que el AFND transite
 */
 void AFNDTransita(AFND * p_afnd){
+	int indice_letra;
 	char* letra = palabraQuitaInicio(p_afnd->cadena_actual);
 	int* transiciones;
-	int* aux = (int*)calloc(sizeof(int)*p_afnd->num_estados);
+	int* aux = (int*)calloc(sizeof(int), p_afnd->num_estados);
 	int k;
 	for( int i = 0; i < p_afnd->num_estados; i++){
 		if(p_afnd->estados_actuales[i] == 1){
