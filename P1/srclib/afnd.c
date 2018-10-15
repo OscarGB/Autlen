@@ -155,6 +155,8 @@ AFND * AFNDInicializaEstado (AFND * p_afnd){
 		estado = estadoTipo(p_afnd->estados[i]);
 		if(estado == INICIAL || estado == INICIAL_Y_FINAL)
 			p_afnd->estados_actuales[i] = 1;
+		else
+			p_afnd->estados_actuales[i] = 0;
 	}
 	return p_afnd;
 }
@@ -163,6 +165,7 @@ AFND * AFNDInicializaEstado (AFND * p_afnd){
 Procesa la entrada segun el AFND
 */
 void AFNDProcesaEntrada(FILE * fd, AFND * p_afnd){
+	AFNDInicializaEstado(p_afnd);
 	AFNDImprimeConjuntoEstadosActual(fd, p_afnd);
 	AFNDImprimeCadenaActual(fd, p_afnd);
 	while(palabraTamano(p_afnd->cadena_actual) != 0){
@@ -185,7 +188,7 @@ void AFNDTransita(AFND * p_afnd){
 		if(p_afnd->estados_actuales[i] == 1){
 			indice_letra = getIndice(p_afnd->alfabeto, letra);
 			transiciones = getTransicion(p_afnd->estados[i], indice_letra);
-			for(k = 0; k < p_afnd->num_simbolos; k++){
+			for(k = 0; k < p_afnd->num_estados; k++){
 				if(transiciones[k] == 1){
 					aux[k] = 1;
 				}
