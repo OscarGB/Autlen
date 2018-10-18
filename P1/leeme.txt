@@ -1,0 +1,5 @@
+Una vez haces make, los ejecutables se encuentran en executables/
+Cada modulo tiene un test básico para probar la funcionalidad.
+El main proporcionado está en test/ con el nombre afnd-test.c
+En caso de querer añadir un fichero C para su compilación, añadirlo en la carpeta test o src.
+En ambos casos, el ejecutable se guardara en la carpeta correspondiente.

@@ -27,7 +27,7 @@ vpath %.a $(LIBDIR)
 vpath %.h $(INCDIR)
 
 #Creamos el directorio ejecutables
-$(shell mkdir $(EXECDIR))
+$(shell mkdir -p $(EXECDIR))
 
 # Nombre de todos los ficheros de cabecera
 INC = $(shell find $(INCDIR) -name '*.h' -printf "%P\n" | xargs)

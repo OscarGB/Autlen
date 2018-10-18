@@ -41,6 +41,7 @@ void AFNDElimina(AFND * p_afnd){
 		estadoElimina(p_afnd->estados[i]);
 	}
 	free(p_afnd->estados);
+	free(p_afnd->estados_actuales);
 	free(p_afnd->nombre);
 	alfabetoElimina(p_afnd->alfabeto);
 	palabraElimina(p_afnd->cadena_actual);
@@ -196,6 +197,7 @@ void AFNDTransita(AFND * p_afnd){
 		}
 	}
 	free(p_afnd->estados_actuales);
+	free(letra);
 	p_afnd->estados_actuales = aux;
 }
 

@@ -1,1 +1,0 @@
-Cajón de sastre (básicamente lo que no se sabe si funciona, si no, si es código de por si acaso o versiones antiguas que da miedo eliminar sin tener que meterte luego a inspeccionar commits en GitHub)

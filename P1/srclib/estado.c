@@ -24,6 +24,8 @@ Estado* estadoNuevo(char* nombre, int tipo, int num_estados, int num_simbolos){
 	if(!est->nombre){free(est); return NULL;}
 
 	est->tipo = tipo;
+	est->num_estados = num_estados;
+	est->num_simbolos = num_simbolos;
 
 	est->transiciones = (int**)malloc(sizeof(int*)*num_simbolos);
 	if(!est->nombre){free(est->nombre);free(est); return NULL;}
@@ -61,19 +63,12 @@ void estadoElimina(Estado* p_s){
 Imprime un estado en el fichero indicado.
 */
 void estadoImprime(FILE* fd, Estado* p_s){
-	int j = 0;
 	if(!p_s || !fd) return;
 
 	if(p_s->tipo == INICIAL || p_s->tipo == INICIAL_Y_FINAL) printf("->");
 	printf("%s", p_s->nombre);
 	if(p_s->tipo == FINAL || p_s->tipo == INICIAL_Y_FINAL) printf("*");
 	printf(" ");
-	// for(int i = 0; i < num_simbolos; i++){
-	// 	for(j = 0; j < num_estados; j++){
-	// 		printf("%d ", p_s->transiciones[i][j]);
-	// 	}
-	// 	printf("\n");
-	// }
 	return;
 }
 

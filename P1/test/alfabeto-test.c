@@ -6,9 +6,6 @@
 int main(int argc, char ** argv)
 {
 	Alfabeto * binario;
-	int i;
-
-
 
 	binario = alfabetoNuevo("0_1",2);
 
