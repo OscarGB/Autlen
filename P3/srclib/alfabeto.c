@@ -17,6 +17,13 @@ char* alfabetoGetSimbolo(Alfabeto* alf, int i){
 	return alf->simbolos[i];
 }
 
+/*Devuelve todos los simbolos del alfabeto*/
+char** alfabetoGetTodosSimbolos(Alfabeto *alf){
+	char **ret = (char**)calloc(sizeof(char*)*(alf->tamano+1));
+	memcpy(ret, alf->simbolos, sizeof(char*)*alf->tamano);
+	return ret;
+}
+
 /*
 Devuelve el indice del simbolo s
 */

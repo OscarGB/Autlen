@@ -33,4 +33,7 @@ Devuelve el símbolo en la posición i
 */
 char* alfabetoGetSimbolo(Alfabeto* alf, int i);
 
+/*Devuelve todos los simbolos del alfabeto*/
+char** alfabetoGetTodosSimbolos(Alfabeto *alf)
+
 #endif
