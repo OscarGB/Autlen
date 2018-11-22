@@ -1,0 +1,25 @@
+Una vez haces make, los ejecutables se encuentran en executables/
+Cada modulo tiene un test básico para probar la funcionalidad.
+El main proporcionado está en test/ con el nombre afnd-test.c
+En caso de querer añadir un fichero C para su compilación, añadirlo en la carpeta test o src.
+En ambos casos, el ejecutable se guardara en la carpeta correspondiente.
+
+En cuanto a la práctica en si:
+Hemos decidido que, por las propiedades de las matrices de transición, vamos a multiplicar la matriz de manera cuadrática, es decir:
+	A = matriz de transición
+	En caso de que necesitemos A**5 por tener 5 estados haremos:
+		A * A = A**2
+		A**2 * A**2 = A**4
+		A**4 * A**4 = A**8 = A**5
+	De esta manera hacemos techo(log2(num_estados)) multiplicaciones matriciales.
+	Siguiendo con nuestro ejemplo: Necesitamos A**5, deberíamos hacer:
+		A * A = A**2
+		A**2 * A = A**3
+		...
+	Por lo que hacemos 4 cálculos, mientras que en nuestro caso haríamos 3
+	Ésto se ve reflejado con mayor diferencia en casos donde el número de estados es mayor:
+		Supongamos un caso con 100 estados:
+			Cálculos con el método clásico: 99
+			Cálculos de nuestra manera: 7 (Se obtiene A**128)
+
+
