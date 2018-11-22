@@ -411,26 +411,94 @@ Crea un afnd a partir de dos dados
 AFND * AFND1OUne(AFND * p_afnd1O_1, AFND * p_afnd1O_2){
 	AFND * nuevo = NULL;
 	char nombre1[10], nombre2[10];
-	char ** simbolos1 = alfabetoGetTodosSimbolos(p_afnd1O_1);
-	char ** simbolos2 = alfabetoGetTodosSimbolos(p_afnd1O_2);
-	char * simbolo_actual = "";
-	int i = 0;
+	char ** simbolos1 = alfabetoGetTodosSimbolos(p_afnd1O_1->alfabeto);
+	char ** simbolos2 = alfabetoGetTodosSimbolos(p_afnd1O_2->alfabeto);
+	char * simbolo_actual, nombre_aux;
+	int i = 0, j = 0, k = 0;
+	AFND * p_afnd1, p_afnd2;
+	int nuevo_num_simbolos = p_afnd1O_1->num_simbolos + p_afnd1O_2->num_simbolos;
+	int nuevo_num_estados = p_afnd1O_1->num_estados + p_afnd1O_2->num_estados + 2;
+	int * transiciones;
+
+	simbolo_actual = simbolos1[i++];
+
+
+	
+	nuevo = AFNDNuevo("afnd", nuevo_num_estados, nuevo_num_simbolos);
+	nuevo->o1 = 1;
 
 	while(simbolo_actual){
-		simbolo_actual = 
+		AFNDInsertaSimbolo(nuevo, simbolo_actual);
+
+		simbolo_actual = simbolos1[i++];
 	}
 
+	i = 0;
+	simbolo_actual = simbolos2[i++];
+	while(simbolo_actual){
+
+		if(getIndice(nuevo->alfabeto, simbolo_actual) < 0){
+			AFNDInsertaSimbolo(nuevo, simbolo_actual);
+		}
+
+		simbolo_actual = simbolos2[i++];		
+	}
+
+	p_afnd1 = AFNDAAFND1O(p_afnd1O_1);
+	p_afnd2 = AFNDAAFND1O(p_afnd1O_2);
+
+	/*Insertar estados de los AFND dados*/
+	for(i = 0; i < p_afnd1->num_estados; i++){
+		AFNDInsertaEstado(nuevo, estadoNombre(p_afnd1->estados[i]), NORMAL);
+	}
+
+	for(i = 0; i < p_afnd2->num_estados; i++){
+		AFNDInsertaEstado(nuevo, estadoNombre(p_afnd2->estados[i]), NORMAL);
+	}
 
 	sprintf(nombre1, "q%d", index++);
 	sprintf(nombre2, "q%d", index++);
-
-	nuevo = AFNDNuevo("afnd", 2, 1);
-	nuevo->o1 = 1;
-
-	AFNDInsertaSimbolo(nuevo, simbolo);
-
+	
 	AFNDInsertaEstado(nuevo, nombre1, INICIAL);
 	AFNDInsertaEstado(nuevo, nombre2, FINAL);
+
+
+
+	/*Insertamos las transiciones*/
+	for(i = 0; i < p_afnd1->num_estados; i++){
+		nombre_aux = estadoNombre(p_afnd1->estados[i]);
+		for(j = 0; j < p_afnd1->num_simbolos; j++){
+			simbolo_acutal = alfabetoGetSimbolo(p_afnd1->alfabeto, j);
+			transiciones = getTransicion(p_afnd1->estados[i], j);
+			for(k = 0; k < p_afnd1->num_estados; k++){
+				if(transiciones[k] == 1){
+					AFNDInsertaLTransicion(nuevo, nombre_aux, simbolo_actual, estadoNombre(p_afnd1->estados[k]));
+				}
+			}
+		}
+	}
+
+	for(i = 0; i < p_afnd2->num_estados; i++){
+		nombre_aux = estadoNombre(p_afnd2->estados[i]);
+		for(j = 0; j < p_afnd2->num_simbolos; j++){
+			simbolo_acutal = alfabetoGetSimbolo(p_afnd2->alfabeto, j);
+			transiciones = getTransicion(p_afnd2->estados[i], j);
+			for(k = 0; k < p_afnd2->num_estados; k++){
+				if(transiciones[k] == 1){
+					AFNDInsertaLTransicion(nuevo, nombre_aux, simbolo_actual, estadoNombre(p_afnd2->estados[k]));
+				}
+			}
+		}
+	}
+
+	/*FALTA COPIAR LAS MATRICES Y PONER LOS UNOS DONDE QUERAMOS*/
+
+
+	if(p_afnd1O_1->o1 == 0)
+		free(p_afnd1);
+
+	if(p_afnd1O_2->o1 == 0)
+		free(p_afnd2);
 
 	return nuevo;
 }
