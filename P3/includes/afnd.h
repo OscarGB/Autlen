@@ -102,4 +102,26 @@ Crea un nuevo automata vacio
 */
 AFND * AFND1ODeVacio();
 
+/*
+Crea un afnd a partir de dos dados, uniendolos
+*/
+AFND * AFND1OUne(AFND * p_afnd1O_1, AFND * p_afnd1O_2);
+
+/*
+Crea un afnd a partir de dos dados, concatenandolos
+*/
+AFND * AFND1OConcatena(AFND * p_afnd1O_1, AFND * p_afnd1O_2);
+
+/*
+Crea un afnd a partir de uno dado, aplicando la operación asterisco
+*/
+AFND * AFND1OEstrella(AFND * p_afnd1O_1);
+
+/*
+Transforma cualquier AFND a 1O
+*/
+AFND * AFNDAAFND1O(AFND * p_afnd1);
+
+
+
 #endif
