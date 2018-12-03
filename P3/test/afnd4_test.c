@@ -34,7 +34,7 @@ int main(int argc, char ** argv)
     fprintf(stdout,"\n*********************************************\n");
 
 /* SE CREA UN AUTÓMATA FINITO PARA LA EXPRESION REGULAR “0”+“1” */
-        p_afnd_l4 = AFND1OUne(p_afnd_l0, p_afnd_l1);
+        p_afnd_l4 = AFND1OUne(p_afnd_l1, p_afnd_l1);
          fprintf(stdout,"\n****************** AFND *********************\n");
     AFNDImprime(stdout,p_afnd_l4);
     fprintf(stdout,"\n*********************************************\n");
@@ -123,11 +123,18 @@ int main(int argc, char ** argv)
         AFNDInsertaLetra(p_afnd_l3,"0");
         AFNDInsertaLetra(p_afnd_l3,"0");
         AFNDInsertaLetra(p_afnd_l3,"1");
+        AFNDInsertaLetra(p_afnd_l3,"0");
         AFNDImprimeCadenaActual(stdout,p_afnd_l3);
         AFNDInicializaEstado(p_afnd_l3);
         AFNDProcesaEntrada(stdout,p_afnd_l3);
         AFNDInicializaCadenaActual(p_afnd_l3);
         fprintf(stdout,"\tLA CADENA VACIA SIN EMBARGO NO ES RECONOCIDA POR EL AUTOMATA DE 11(0+1)* \n");
+        AFNDImprimeCadenaActual(stdout,p_afnd_l3);
+        AFNDInicializaEstado(p_afnd_l3);
+        AFNDProcesaEntrada(stdout,p_afnd_l3);
+        AFNDInicializaCadenaActual(p_afnd_l3);
+        fprintf(stdout,"\tLA CADENA 2 NO ES RECONOCIDA POR EL AUTOMATA DE 11(0+1)* \n");
+        AFNDInsertaLetra(p_afnd_l3,"2");
         AFNDImprimeCadenaActual(stdout,p_afnd_l3);
         AFNDInicializaEstado(p_afnd_l3);
         AFNDProcesaEntrada(stdout,p_afnd_l3);
