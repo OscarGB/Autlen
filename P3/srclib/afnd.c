@@ -704,3 +704,56 @@ AFND * AFND1OEstrella(AFND * p_afnd1O_1){
 
 	return nuevo;
 }
+
+
+/*
+Imprime el diagrama en formato DOT
+*/
+void AFNDADot(FILE * fd, AFND * p_afnd) {
+	int i, j, k;
+	int * destinos = NULL;
+	
+	if(!fd) 
+		return;
+
+	fprintf(fd, "digraph %s { rankdir=LR;\n\t_invisible [style=\"invis\"];\n", p_afnd->nombre);
+	/*Imprime estados*/
+	for(i = 0; i < p_afnd->num_estados; i++){
+		estadoImprimeDot(fd, p_afnd->estados[i]);
+	}
+	/*Imprime transiciones iniciales*/
+	for(i = 0; i < p_afnd->num_estados; i++){
+		estadoImprimeTransicionInicial(fd, p_afnd->estados[i]);
+	}
+
+	/*Imprime transiciones lambda*/
+	for(i = 0; i < p_afnd->num_estados; i++){
+			destinos = p_afnd->lambdas[i];
+			for(k = 0; k < p_afnd->num_estados; k++){
+				if(destinos[k] == 1 && i != k){
+					fprintf(fd, "\t%s -> ", estadoNombre(p_afnd->estados[i]));
+					fprintf(fd, "%s ", estadoNombre(p_afnd->estados[k]));
+					fprintf(fd, "[label=\"&lambda;\"];\n");
+				}
+			}
+	}
+
+
+	/*Imprime las transiciones*/
+	for(i = 0; i < p_afnd->num_estados; i++){
+		for(j = 0; j < p_afnd->num_simbolos; j++){
+			destinos = getTransicion(p_afnd->estados[i], j);
+			for(k = 0; k < p_afnd->num_estados; k++){
+				if(destinos[k] == 1){
+					fprintf(fd, "\t%s -> ", estadoNombre(p_afnd->estados[i]));
+					fprintf(fd, "%s ", estadoNombre(p_afnd->estados[k]));
+					fprintf(fd, "[label=\"%s\"];\n", alfabetoGetSimbolo(p_afnd->alfabeto, j));
+				}
+			}
+		}
+	}
+
+	fprintf(fd, "}");
+
+	return;
+}
