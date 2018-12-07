@@ -417,7 +417,6 @@ AFND * AFNDAAFND1O(AFND * p_afnd1){
 
 	int nuevo_num_simbolos = p_afnd1->num_simbolos;
 	int nuevo_num_estados = p_afnd1->num_estados + 2;
-	printf("%d\n\n\n", nuevo_num_estados);
 
 	nuevo = AFNDNuevo("afnd", nuevo_num_estados, nuevo_num_simbolos);
 	nuevo->o1 = 1;
@@ -480,13 +479,11 @@ AFND * NuevoDesde2Afnd1O(AFND * p_afnd1, AFND * p_afnd2){
 	int repetidos = 0;
 
 	for (i = 0; i < p_afnd1->num_simbolos; i++){
-		printf("%s %d\n", simbolos1[i], getIndice(p_afnd1->alfabeto, simbolos1[i]));
 		if(getIndice(p_afnd2->alfabeto, simbolos1[i]) >= 0){
 			repetidos++;
 		}
 	}
 
-	printf("repetidos: %d\n", repetidos);
 
 
 	int nuevo_num_simbolos = p_afnd1->num_simbolos + p_afnd2->num_simbolos - repetidos;
@@ -498,7 +495,6 @@ AFND * NuevoDesde2Afnd1O(AFND * p_afnd1, AFND * p_afnd2){
 	i = 0;
 	simbolo_actual = simbolos1[i++];
 	while(simbolo_actual){
-		printf("Insertar %s\n", simbolo_actual);
 		AFNDInsertaSimbolo(nuevo, simbolo_actual);
 
 		simbolo_actual = simbolos1[i++];
@@ -507,10 +503,7 @@ AFND * NuevoDesde2Afnd1O(AFND * p_afnd1, AFND * p_afnd2){
 	i = 0;
 	simbolo_actual = simbolos2[i++];
 	while(simbolo_actual){
-		printf("Intentar insertar %s\n", simbolo_actual);
-
 		if(getIndice(nuevo->alfabeto, simbolo_actual) < 0){
-			printf("Insertar %s\n", simbolo_actual);
 			AFNDInsertaSimbolo(nuevo, simbolo_actual);
 		}
 
