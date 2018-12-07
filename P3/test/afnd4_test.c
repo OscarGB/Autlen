@@ -16,19 +16,19 @@ int main(int argc, char ** argv)
 
 
 /* SE CREA UN AUTÓMATA FINITO PARA LA EXPRESION REGULAR “1” */
-        p_afnd_l0 = AFND1ODeSimbolo("1");
-         fprintf(stdout,"\n****************** AFND *********************\n");
-    AFNDImprime(stdout,p_afnd_l0);
-    fprintf(stdout, "********************* DOT FILE *********************\n");
-    AFNDADot(stdout, p_afnd_l0);
-    fprintf(stdout,"\n*********************************************\n");
-
-/* SE CREA UN AUTÓMATA FINITO PARA LA EXPRESION REGULAR “0” */
-        p_afnd_l1 = AFND1ODeSimbolo("0");
+        p_afnd_l1 = AFND1ODeSimbolo("1");
          fprintf(stdout,"\n****************** AFND *********************\n");
     AFNDImprime(stdout,p_afnd_l1);
     fprintf(stdout, "********************* DOT FILE *********************\n");
     AFNDADot(stdout, p_afnd_l1);
+    fprintf(stdout,"\n*********************************************\n");
+
+/* SE CREA UN AUTÓMATA FINITO PARA LA EXPRESION REGULAR “0” */
+        p_afnd_l0 = AFND1ODeSimbolo("0");
+         fprintf(stdout,"\n****************** AFND *********************\n");
+    AFNDImprime(stdout,p_afnd_l0);
+    fprintf(stdout, "********************* DOT FILE *********************\n");
+    AFNDADot(stdout, p_afnd_l0);
     fprintf(stdout,"\n*********************************************\n");
 
 /* SE CREA UN AUTÓMATA FINITO PARA LA EXPRESION REGULAR “1”.”1” */
@@ -40,7 +40,7 @@ int main(int argc, char ** argv)
     fprintf(stdout,"\n*********************************************\n");
 
 /* SE CREA UN AUTÓMATA FINITO PARA LA EXPRESION REGULAR “0”+“1” */
-        p_afnd_l4 = AFND1OUne(p_afnd_l1, p_afnd_l1);
+        p_afnd_l4 = AFND1OUne(p_afnd_l0, p_afnd_l1);
          fprintf(stdout,"\n****************** AFND *********************\n");
     AFNDImprime(stdout,p_afnd_l4);
     fprintf(stdout, "********************* DOT FILE *********************\n");

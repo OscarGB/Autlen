@@ -486,7 +486,8 @@ AFND * NuevoDesde2Afnd1O(AFND * p_afnd1, AFND * p_afnd2){
 		}
 	}
 
-	simbolo_actual = simbolos1[i++];
+	printf("repetidos: %d\n", repetidos);
+
 
 	int nuevo_num_simbolos = p_afnd1->num_simbolos + p_afnd2->num_simbolos - repetidos;
 	int nuevo_num_estados = p_afnd1->num_estados + p_afnd2->num_estados + 2;
@@ -494,7 +495,10 @@ AFND * NuevoDesde2Afnd1O(AFND * p_afnd1, AFND * p_afnd2){
 	nuevo = AFNDNuevo("afnd", nuevo_num_estados, nuevo_num_simbolos);
 	nuevo->o1 = 1;
 
+	i = 0;
+	simbolo_actual = simbolos1[i++];
 	while(simbolo_actual){
+		printf("Insertar %s\n", simbolo_actual);
 		AFNDInsertaSimbolo(nuevo, simbolo_actual);
 
 		simbolo_actual = simbolos1[i++];
@@ -503,8 +507,10 @@ AFND * NuevoDesde2Afnd1O(AFND * p_afnd1, AFND * p_afnd2){
 	i = 0;
 	simbolo_actual = simbolos2[i++];
 	while(simbolo_actual){
+		printf("Intentar insertar %s\n", simbolo_actual);
 
 		if(getIndice(nuevo->alfabeto, simbolo_actual) < 0){
+			printf("Insertar %s\n", simbolo_actual);
 			AFNDInsertaSimbolo(nuevo, simbolo_actual);
 		}
 
@@ -528,8 +534,6 @@ AFND * NuevoDesde2Afnd1O(AFND * p_afnd1, AFND * p_afnd2){
 	
 	AFNDInsertaEstado(nuevo, nombre1, INICIAL);
 	AFNDInsertaEstado(nuevo, nombre2, FINAL);
-
-
 
 	/*Insertamos las transiciones del primer automata*/
 	for(i = 0; i < p_afnd1->num_estados; i++){
@@ -753,7 +757,7 @@ void AFNDADot(FILE * fd, AFND * p_afnd) {
 		}
 	}
 
-	fprintf(fd, "}");
+	fprintf(fd, "}\n\n");
 
 	return;
 }
