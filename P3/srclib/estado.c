@@ -65,10 +65,26 @@ Imprime un estado en el fichero indicado.
 void estadoImprime(FILE* fd, Estado* p_s){
 	if(!p_s || !fd) return;
 
-	if(p_s->tipo == INICIAL || p_s->tipo == INICIAL_Y_FINAL) printf("->");
-	printf("%s", p_s->nombre);
-	if(p_s->tipo == FINAL || p_s->tipo == INICIAL_Y_FINAL) printf("*");
-	printf(" ");
+	if(p_s->tipo == INICIAL || p_s->tipo == INICIAL_Y_FINAL) fprintf(fd, "->");
+	fprintf(fd, "%s", p_s->nombre);
+	if(p_s->tipo == FINAL || p_s->tipo == INICIAL_Y_FINAL) fprintf(fd, "*");
+	fprintf(fd, " ");
+	return;
+}
+
+void estadoImprimeDot(FILE* fd, Estado* p_s){
+	if(!p_s || !fd) return;
+
+	fprintf(fd, "\t%s", p_s->nombre);
+	if(p_s->tipo == FINAL || p_s->tipo == INICIAL_Y_FINAL) fprintf(fd, " [penwidth=\"2\"]");
+	fprintf(fd, ";\n");
+	return;
+}
+
+void estadoImprimeTransicionInicial(FILE*fd, Estado* p_s){
+	if(!p_s || !fd) return;
+
+	if(p_s->tipo == INICIAL || p_s->tipo == INICIAL_Y_FINAL) fprintf(fd, "\t_invisible -> %s;\n", p_s->nombre);
 	return;
 }
 

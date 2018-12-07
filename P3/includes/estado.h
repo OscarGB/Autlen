@@ -30,6 +30,13 @@ Imprime un estado en el fichero indicado.
 void estadoImprime(FILE* fd, Estado* p_s);
 
 /*
+Imprime un estado en el fichero indicado en formato dot.
+*/
+void estadoImprimeDot(FILE* fd, Estado* p_s);
+
+void estadoImprimeTransicionInicial(FILE*fd, Estado* p_s);
+
+/*
 Devuelve 1 si p_s tiene dicho nombre.
 */
 int estadoEs(Estado* p_s, char* nombre);
