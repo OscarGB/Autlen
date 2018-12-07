@@ -182,6 +182,12 @@ Hace que el AFND transite
 void AFNDTransita(AFND * p_afnd){
 	int indice_letra;
 	char* letra = palabraQuitaInicio(p_afnd->cadena_actual);
+	if(getIndice(p_afnd->alfabeto, letra) < 0){
+		for(int i = 0; i < p_afnd->num_estados; i++){
+			p_afnd->estados_actuales[i] = 0;
+			return;
+		}
+	}
 	int* transiciones;
 	int* aux = (int*)calloc(sizeof(int), p_afnd->num_estados);
 	int k;

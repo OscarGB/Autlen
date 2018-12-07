@@ -62,6 +62,8 @@ int main(int argc, char ** argv)
 
 
 /* DEFINICIÓN DE LA CADENA DE ENTRADA [ 0 1 1 0 0 ] */
+
+    p_afnd= AFNDInsertaLetra(p_afnd,"2");
     p_afnd= AFNDInsertaLetra(p_afnd,"1");
     p_afnd= AFNDInsertaLetra(p_afnd,"1");
     p_afnd= AFNDInsertaLetra(p_afnd,"1");
