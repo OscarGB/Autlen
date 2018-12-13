@@ -126,7 +126,7 @@ AFND * AFNDAAFND1O(AFND * p_afnd1);
 /*
 Imprime el diagrama en formato DOT
 */
-void AFNDADot(FILE * fd, AFND * p_afnd);
+void AFNDADot(AFND * p_afnd);
 
 
 

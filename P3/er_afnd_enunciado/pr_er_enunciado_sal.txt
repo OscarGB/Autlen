@@ -1,0 +1,368 @@
+EJEMPLO DE AUTÓMATA DE UNA EXPRESIÓN CORRESPONDIENTE A UN SÍMBOLO: "1"
+anfd1o_1={
+	num_simbolos = 1
+
+	A={ 1 }
+
+	num_estados = 2
+
+	Q={->q0  qf*  }
+
+	RL={
+		[0]	[1]
+		CIERRE
+	[0]	0	0
+	[1]	0	0
+
+		POTENCIA i
+	[0]	0	0
+	[1]	0	0
+
+		RELACION INICIAL i
+	[0]	0	0
+	[1]	0	0
+}
+
+	Funcion de Transición = {
+		f(q0,1)={ qf }
+		f(qf,1)={ }
+	}
+}
+EJEMPLO DE AUTÓMATA DE UNA EXPRESIÓN CORRESPONDIENTE A LA CONCATENACIÓN DE OTROS DOS, JUSTAMENTE CONCATENA EL ANTERIOR CONSIGO MISMO
+anfd1o_1_1_K_anfd1o_1_2={
+	num_simbolos = 1
+
+	A_U_A={ 1 }
+
+	num_estados = 6
+
+	Q={_K1_q0  _K1_qf  _K2_q0  _K2_qf  ->_K_i  _K_f*  }
+
+	RL+*={
+		[0]	[1]	[2]	[3]	[4]	[5]
+		CIERRE
+	[0]	1	0	0	0	0	0
+	[1]	0	1	1	0	0	0
+	[2]	0	0	1	0	0	0
+	[3]	0	0	0	1	0	1
+	[4]	1	0	0	0	1	0
+	[5]	0	0	0	0	0	1
+
+		POTENCIA i
+	[0]	0	0	0	0	0	0
+	[1]	0	0	0	0	0	0
+	[2]	0	0	0	0	0	0
+	[3]	0	0	0	0	0	0
+	[4]	0	0	0	0	0	0
+	[5]	0	0	0	0	0	0
+
+		RELACION INICIAL i
+	[0]	0	0	0	0	0	0
+	[1]	0	0	1	0	0	0
+	[2]	0	0	0	0	0	0
+	[3]	0	0	0	0	0	1
+	[4]	1	0	0	0	0	0
+	[5]	0	0	0	0	0	0
+}
+
+	Funcion de Transición = {
+		f(_K1_q0,1)={ _K1_qf }
+		f(_K1_qf,1)={ }
+		f(_K2_q0,1)={ _K2_qf }
+		f(_K2_qf,1)={ }
+		f(_K_i,1)={ }
+		f(_K_f,1)={ }
+	}
+}
+A CONTINUACIÓN SE VA A MOSTRARA LA UNIÓN DE DOS AUTÓMATAS QUE VIENEN DE EXPRESIONES REGULARES, UNO DE ELLOS ES EL CORRESPONDIENTE A LA EXPRESION "1" QUE YA SE MOSTRÓ ANTERIORMENTE, EL OTRO ES EL DE LA EXPRESIÓN "0" QUE SE MUESTRA A CONTINUACIÓN
+anfd1o_0={
+	num_simbolos = 1
+
+	A={ 0 }
+
+	num_estados = 2
+
+	Q={->q0  qf*  }
+
+	RL={
+		[0]	[1]
+		CIERRE
+	[0]	0	0
+	[1]	0	0
+
+		POTENCIA i
+	[0]	0	0
+	[1]	0	0
+
+		RELACION INICIAL i
+	[0]	0	0
+	[1]	0	0
+}
+
+	Funcion de Transición = {
+		f(q0,0)={ qf }
+		f(qf,0)={ }
+	}
+}
+Y ESTA ES SU UNIÓN
+anfd1o_0_1_U_anfd1o_1_2={
+	num_simbolos = 2
+
+	A_U_A={ 0 1 }
+
+	num_estados = 6
+
+	Q={_U1_q0  _U1_qf  _U2_q0  _U2_qf  ->_i_1O  _f_1O*  }
+
+	RL+*={
+		[0]	[1]	[2]	[3]	[4]	[5]
+		CIERRE
+	[0]	1	0	0	0	0	0
+	[1]	0	1	0	0	0	1
+	[2]	0	0	1	0	0	0
+	[3]	0	0	0	1	0	1
+	[4]	1	0	1	0	1	0
+	[5]	0	0	0	0	0	1
+
+		POTENCIA i
+	[0]	0	0	0	0	0	0
+	[1]	0	0	0	0	0	0
+	[2]	0	0	0	0	0	0
+	[3]	0	0	0	0	0	0
+	[4]	0	0	0	0	0	0
+	[5]	0	0	0	0	0	0
+
+		RELACION INICIAL i
+	[0]	0	0	0	0	0	0
+	[1]	0	0	0	0	0	1
+	[2]	0	0	0	0	0	0
+	[3]	0	0	0	0	0	1
+	[4]	1	0	1	0	0	0
+	[5]	0	0	0	0	0	0
+}
+
+	Funcion de Transición = {
+		f(_U1_q0,0)={ _U1_qf }
+		f(_U1_q0,1)={ }
+		f(_U1_qf,0)={ }
+		f(_U1_qf,1)={ }
+		f(_U2_q0,0)={ }
+		f(_U2_q0,1)={ _U2_qf }
+		f(_U2_qf,0)={ }
+		f(_U2_qf,1)={ }
+		f(_i_1O,0)={ }
+		f(_i_1O,1)={ }
+		f(_f_1O,0)={ }
+		f(_f_1O,1)={ }
+	}
+}
+SE MUESTRA EL AUTÓMATA FINITO CORRESPONDIENTE A LA EXPRESION "1" * A PARTIR DEL AUTÓMATA ASOCIADO CON "1" QUE YA SE MOSTRÓ ANTERIORMENTE
+anfd1o_1X={
+	num_simbolos = 1
+
+	A={ 1 }
+
+	num_estados = 4
+
+	Q={Xq0  Xqf  ->_X_i  _X_f*  }
+
+	RL+++*={
+		[0]	[1]	[2]	[3]
+		CIERRE
+	[0]	1	0	0	0
+	[1]	1	1	1	1
+	[2]	1	0	1	1
+	[3]	1	0	1	1
+
+		POTENCIA i
+	[0]	0	0	0	0
+	[1]	0	0	1	0
+	[2]	0	0	1	0
+	[3]	1	0	0	1
+
+		RELACION INICIAL i
+	[0]	0	0	0	0
+	[1]	0	0	0	1
+	[2]	1	0	0	1
+	[3]	0	0	1	0
+}
+
+	Funcion de Transición = {
+		f(Xq0,1)={ Xqf }
+		f(Xqf,1)={ }
+		f(_X_i,1)={ }
+		f(_X_f,1)={ }
+	}
+}
+Y, A CONTINUACIÓN, ALGUNOS EJEMPLOS DE PROCESADO DE CADENAS DEL AUTÓMATA DE LA EXPRESIÓN 11(0+1)*
+anfd1o_1_1_K_anfd1o_1_2_1_K_anfd1o_0_1_U_anfd1o_1_2X_2={
+	num_simbolos = 2
+
+	A_U_A_U_A={ 1 0 }
+
+	num_estados = 16
+
+	Q={_K1__K1_q0  _K1__K1_qf  _K1__K2_q0  _K1__K2_qf  _K1__K_i  _K1__K_f  _K2_X_U1_q0  _K2_X_U1_qf  _K2_X_U2_q0  _K2_X_U2_qf  _K2_X_i_1O  _K2_X_f_1O  _K2__X_i  _K2__X_f  ->_K_i  _K_f*  }
+
+	RL+++++*={
+		[0]	[1]	[2]	[3]	[4]	[5]	[6]	[7]	[8]	[9]	[10]	[11]	[12]	[13]	[14]	[15]
+		CIERRE
+	[0]	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	[1]	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0
+	[2]	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0
+	[3]	0	0	0	1	0	1	1	0	1	0	1	0	1	1	0	1
+	[4]	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0
+	[5]	0	0	0	0	0	1	1	0	1	0	1	0	1	1	0	1
+	[6]	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0
+	[7]	0	0	0	0	0	0	1	1	1	0	1	1	1	1	0	1
+	[8]	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0
+	[9]	0	0	0	0	0	0	1	0	1	1	1	1	1	1	0	1
+	[10]	0	0	0	0	0	0	1	0	1	0	1	0	0	0	0	0
+	[11]	0	0	0	0	0	0	1	0	1	0	1	1	1	1	0	1
+	[12]	0	0	0	0	0	0	1	0	1	0	1	0	1	1	0	1
+	[13]	0	0	0	0	0	0	1	0	1	0	1	0	1	1	0	1
+	[14]	1	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0
+	[15]	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1
+
+		POTENCIA i
+	[0]	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	[1]	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	[2]	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	[3]	0	0	0	0	0	0	1	0	1	0	0	0	1	0	0	1
+	[4]	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	[5]	0	0	0	0	0	0	0	0	0	0	1	0	0	1	0	0
+	[6]	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	[7]	0	0	0	0	0	0	0	0	0	0	1	0	0	1	0	0
+	[8]	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	[9]	0	0	0	0	0	0	0	0	0	0	1	0	0	1	0	0
+	[10]	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	[11]	0	0	0	0	0	0	1	0	1	0	0	0	1	0	0	1
+	[12]	0	0	0	0	0	0	1	0	1	0	0	0	1	0	0	1
+	[13]	0	0	0	0	0	0	0	0	0	0	1	0	0	1	0	0
+	[14]	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	[15]	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+
+		RELACION INICIAL i
+	[0]	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	[1]	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0
+	[2]	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	[3]	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0
+	[4]	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	[5]	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
+	[6]	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	[7]	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0
+	[8]	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	[9]	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0
+	[10]	0	0	0	0	0	0	1	0	1	0	0	0	0	0	0	0
+	[11]	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0
+	[12]	0	0	0	0	0	0	0	0	0	0	1	0	0	1	0	0
+	[13]	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	1
+	[14]	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0
+	[15]	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+}
+
+	Funcion de Transición = {
+		f(_K1__K1_q0,1)={ _K1__K1_qf }
+		f(_K1__K1_q0,0)={ }
+		f(_K1__K1_qf,1)={ }
+		f(_K1__K1_qf,0)={ }
+		f(_K1__K2_q0,1)={ _K1__K2_qf }
+		f(_K1__K2_q0,0)={ }
+		f(_K1__K2_qf,1)={ }
+		f(_K1__K2_qf,0)={ }
+		f(_K1__K_i,1)={ }
+		f(_K1__K_i,0)={ }
+		f(_K1__K_f,1)={ }
+		f(_K1__K_f,0)={ }
+		f(_K2_X_U1_q0,1)={ }
+		f(_K2_X_U1_q0,0)={ _K2_X_U1_qf }
+		f(_K2_X_U1_qf,1)={ }
+		f(_K2_X_U1_qf,0)={ }
+		f(_K2_X_U2_q0,1)={ _K2_X_U2_qf }
+		f(_K2_X_U2_q0,0)={ }
+		f(_K2_X_U2_qf,1)={ }
+		f(_K2_X_U2_qf,0)={ }
+		f(_K2_X_i_1O,1)={ }
+		f(_K2_X_i_1O,0)={ }
+		f(_K2_X_f_1O,1)={ }
+		f(_K2_X_f_1O,0)={ }
+		f(_K2__X_i,1)={ }
+		f(_K2__X_i,0)={ }
+		f(_K2__X_f,1)={ }
+		f(_K2__X_f,0)={ }
+		f(_K_i,1)={ }
+		f(_K_i,0)={ }
+		f(_K_f,1)={ }
+		f(_K_f,0)={ }
+	}
+}
+	LA CADENA 11 ES RECONOCIDA POR EL AUTOMATA DE 11(0+1)* POR SU PRINCIPIO
+[(2) 1 1]
+
+ACTUALMENTE EN {_K1__K1_q0 _K1__K_i ->_K_i }
+[(2) 1 1]
+
+ACTUALMENTE EN {_K1__K1_qf _K1__K2_q0 }
+[(1) 1]
+
+ACTUALMENTE EN {_K1__K2_qf _K1__K_f _K2_X_U1_q0 _K2_X_U2_q0 _K2_X_i_1O _K2__X_i _K2__X_f _K_f* }
+[(0)]
+	LA CADENA 110 TAMBIÉN ES RECONOCIDA POR EL AUTOMATA DE 11(0+1)* 
+[(3) 1 1 0]
+
+ACTUALMENTE EN {_K1__K1_q0 _K1__K_i ->_K_i }
+[(3) 1 1 0]
+
+ACTUALMENTE EN {_K1__K1_qf _K1__K2_q0 }
+[(2) 1 0]
+
+ACTUALMENTE EN {_K1__K2_qf _K1__K_f _K2_X_U1_q0 _K2_X_U2_q0 _K2_X_i_1O _K2__X_i _K2__X_f _K_f* }
+[(1) 0]
+
+ACTUALMENTE EN {_K2_X_U1_q0 _K2_X_U1_qf _K2_X_U2_q0 _K2_X_i_1O _K2_X_f_1O _K2__X_i _K2__X_f _K_f* }
+[(0)]
+	LA CADENA 111 TAMBIÉN ES RECONOCIDA POR EL AUTOMATA DE 11(0+1)* 
+[(3) 1 1 1]
+
+ACTUALMENTE EN {_K1__K1_q0 _K1__K_i ->_K_i }
+[(3) 1 1 1]
+
+ACTUALMENTE EN {_K1__K1_qf _K1__K2_q0 }
+[(2) 1 1]
+
+ACTUALMENTE EN {_K1__K2_qf _K1__K_f _K2_X_U1_q0 _K2_X_U2_q0 _K2_X_i_1O _K2__X_i _K2__X_f _K_f* }
+[(1) 1]
+
+ACTUALMENTE EN {_K2_X_U1_q0 _K2_X_U2_q0 _K2_X_U2_qf _K2_X_i_1O _K2_X_f_1O _K2__X_i _K2__X_f _K_f* }
+[(0)]
+	LA CADENA 1111001 TAMBIÉN ES RECONOCIDA POR EL AUTOMATA DE 11(0+1)* 
+[(7) 1 1 1 1 0 0 1]
+
+ACTUALMENTE EN {_K1__K1_q0 _K1__K_i ->_K_i }
+[(7) 1 1 1 1 0 0 1]
+
+ACTUALMENTE EN {_K1__K1_qf _K1__K2_q0 }
+[(6) 1 1 1 0 0 1]
+
+ACTUALMENTE EN {_K1__K2_qf _K1__K_f _K2_X_U1_q0 _K2_X_U2_q0 _K2_X_i_1O _K2__X_i _K2__X_f _K_f* }
+[(5) 1 1 0 0 1]
+
+ACTUALMENTE EN {_K2_X_U1_q0 _K2_X_U2_q0 _K2_X_U2_qf _K2_X_i_1O _K2_X_f_1O _K2__X_i _K2__X_f _K_f* }
+[(4) 1 0 0 1]
+
+ACTUALMENTE EN {_K2_X_U1_q0 _K2_X_U2_q0 _K2_X_U2_qf _K2_X_i_1O _K2_X_f_1O _K2__X_i _K2__X_f _K_f* }
+[(3) 0 0 1]
+
+ACTUALMENTE EN {_K2_X_U1_q0 _K2_X_U1_qf _K2_X_U2_q0 _K2_X_i_1O _K2_X_f_1O _K2__X_i _K2__X_f _K_f* }
+[(2) 0 1]
+
+ACTUALMENTE EN {_K2_X_U1_q0 _K2_X_U1_qf _K2_X_U2_q0 _K2_X_i_1O _K2_X_f_1O _K2__X_i _K2__X_f _K_f* }
+[(1) 1]
+
+ACTUALMENTE EN {_K2_X_U1_q0 _K2_X_U2_q0 _K2_X_U2_qf _K2_X_i_1O _K2_X_f_1O _K2__X_i _K2__X_f _K_f* }
+[(0)]
+	LA CADENA VACIA SIN EMBARGO NO ES RECONOCIDA POR EL AUTOMATA DE 11(0+1)* 
+[(0)]
+
+ACTUALMENTE EN {_K1__K1_q0 _K1__K_i ->_K_i }
+[(0)]

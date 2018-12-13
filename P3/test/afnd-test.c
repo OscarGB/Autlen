@@ -50,7 +50,7 @@ int main(int argc, char ** argv)
     AFNDCierraLTransicion(p_afnd_l);
 
     AFNDImprime(stdout,p_afnd_l);
-    AFNDADot(stdout, p_afnd_l);
+    AFNDADot(p_afnd_l);
 
     AFNDInsertaLetra(p_afnd_l,"1");
     AFNDInsertaLetra(p_afnd_l,"1");

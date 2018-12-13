@@ -706,9 +706,12 @@ AFND * AFND1OEstrella(AFND * p_afnd1O_1){
 /*
 Imprime el diagrama en formato DOT
 */
-void AFNDADot(FILE * fd, AFND * p_afnd) {
+void AFNDADot(AFND * p_afnd) {
 	int i, j, k;
 	int * destinos = NULL;
+	FILE * fd;
+
+	fd = fopen("output.dot", "a+");
 	
 	if(!fd) 
 		return;
