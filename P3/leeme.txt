@@ -23,3 +23,4 @@ Hemos decidido que, por las propiedades de las matrices de transición, vamos a 
 			Cálculos de nuestra manera: 7 (Se obtiene A**128)
 
 
+Para unir afnd's, hemos seguido un método de "copia y pega", hacemos siempre un nuevo afnd copiando los simbolos, estados y transiciones del o los anteriores. Siempre añadimos dos estados nuevos, inicial y final y las transiciones lambda correspondientes para conectar los estados finales previos con el final actual y los iniciales análogamente.
